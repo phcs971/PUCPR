@@ -28,14 +28,17 @@ fprintf("\n\n")
 
 input("Enter para continuar...")
 
-H1_sys = q * R1 / ((C1*R1*s + 1) * (C2*R2*s + 1));
+H1_sys = tfToSym(H1);
 h1 = ilaplace(partfrac(H1_sys));
 fprintf("\n    h1 =\n\n")
 pretty(h1)
 
-time = 0:0.1:100;
-u = time.^0;
-lsim(H1, u, time)
+time = 0:0.1:120;
+result = double(subs(h1, t, time));
+figure(1)
+plot(time, result)
+xlabel("Time (seconds)")
+ylabel("h1(t) (meters)")
 
 input("Enter para continuar...")
 

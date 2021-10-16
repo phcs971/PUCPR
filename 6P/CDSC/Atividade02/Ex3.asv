@@ -1,0 +1,27 @@
+clc
+clear
+
+Kp = 4;
+Ti = 2;
+Td = 0.8;
+
+P = tf(Kp, 1);
+I = tf(1, [Ti 0]);
+D = tf([Td 0], 1);
+PI = P + P*I;
+PD = P + P*D;
+PID = P + P*I + P*D;
+
+figure(1)
+step(P)
+hold on
+step(I)
+hold on
+step(PI)
+hold on
+step(PD)
+hold on
+step(PDI)
+
+time = 1:0.01:10;
+
