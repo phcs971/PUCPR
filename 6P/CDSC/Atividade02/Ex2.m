@@ -42,19 +42,38 @@ fprintf("\n\n")
 
 input("Enter para continuar...")
 
-Vob_sym = tfToSym(Vob);
-vob = ilaplace(partfrac(Vob_sym)) * 2;
-prettu(vob)
+Vob_sym = tfToSym(Vob) * 2/s;
+vob = ilaplace(partfrac(Vob_sym));
+pretty(vob)
 time = 0:1:1000;
 result = double(subs(vob, t, time));
+settled = find(abs(result - result(end)) < 0.02*max(result));
+settlingTime = settled(1);
 figure(1)
-plot(time, result)
-xlabel("Time (seconds)")
-ylabel("Vo(t) (volts)")
+hold on
+p1 = plot(time, result);
 
+p2 = xline(settlingTime, 'r', 'LineStyle', '--', 'LineWidth', 2);
+xlabel("Tempo (s)")
+ylabel("Potência de Saída (V)")
+
+legend([p1, p2], ["Resposta", "Tempo de Estabilidade"]);
+hold off
 input("Enter para continuar...")
 
 figure(2)
-step(Voa)
 hold on
-step(Vob)
+step(Voa, 'b');
+step(Vob, 'r');
+s1Info = stepinfo(Voa);
+s2Info = stepinfo(Vob);
+
+l1 = xline(s1Info.SettlingTime, 'b', 'LineStyle', '--', 'LineWidth', 2);
+l2 = xline(s2Info.SettlingTime, 'r', 'LineStyle', '--', 'LineWidth', 2);
+
+legend([l1, l2], ["Tempo de Estabilidade A", "Tempo de Estabilidade B"]);
+
+title("")
+xlabel("Tempo")
+ylabel("Potência de Saída (V)")
+

@@ -29,38 +29,52 @@ fprintf("\n\n")
 input("Enter para continuar...")
 
 H1_sys = tfToSym(H1);
-h1 = ilaplace(partfrac(H1_sys));
+h1 = ilaplace(partfrac(H1_sys / s));
 fprintf("\n    h1 =\n\n")
 pretty(h1)
 
-time = 0:0.1:120;
+time = 0:0.1:300;
 result = double(subs(h1, t, time));
+stable = time.^0 + 3;
 figure(1)
-plot(time, result)
-xlabel("Time (seconds)")
-ylabel("h1(t) (meters)")
+hold on
+p1 = plot(time, result, 'b');
+p2 = plot(time, stable, 'r', 'LineStyle', '--', 'LineWidth', 2);
+xlabel("Tempo (s)")
+ylabel("Nível do Reservatório (m)")
+legend([p1, p2], ["Resposta", "Valor de Regime"]);
+hold off
 
 input("Enter para continuar...")
 
 figure(2)
+hold on
 step(H1)
-hold on
 step(H2)
-hold on
 step(Q1)
 
+title("")
+xlabel("Tempo")
+ylabel("Amplitude")
+
 figure(3)
+hold on
 impulse(H1)
-hold on
 impulse(H2)
-hold on
 impulse(Q1)
 
+title("")
+xlabel("Tempo")
+ylabel("Amplitude")
+
 figure(4)
+hold on
 time = 0:0.01:10;
 u = 3 * sin(pi * time);
 lsim(H1, u, time)
-hold on
 lsim(H2, u, time)
-hold on
 lsim(Q1, u, time)
+
+title("")
+xlabel("Tempo")
+ylabel("Amplitude")
