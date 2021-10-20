@@ -6,15 +6,11 @@ Ti = 2;
 Td = 0.8;
 
 P = tf(Kp, 1);
-I = tf(1, [Ti 0]);
-D = tf([Td 0], 1);
-PI = feedback(P + P*I, 1);
-PD = feedback(P + P*D, 1);
-PID = feedback(P + P*I + P*D, 1);
-
-P = feedback(P, 1);
-I = feedback(I, 1);
-D = feedback(D, 1);
+I = P * tf(1, [Ti 0]);
+D = P * tf([Td 0], 1);
+PI = P + I;
+PD = feedback(P + D, 1);
+PID = feedback(P + I + D, 1);
 
 figure(1)
 step(P)
