@@ -69,7 +69,7 @@ ylabel("Amplitude")
 
 figure(4)
 hold on
-time = 0:0.01:10;
+time = 0:0.01:40;
 u = 3 * sin(pi * time);
 lsim(H1, u, time)
 lsim(H2, u, time)
