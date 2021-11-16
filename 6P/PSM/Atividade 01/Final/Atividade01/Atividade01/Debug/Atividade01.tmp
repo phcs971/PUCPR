@@ -1,0 +1,37 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>D:\Documents\Code\Arduino\PSM\Atividade 01\Final\Atividade01\Atividade01\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>D:/ProgramFiles\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc</DIR>
+  <DIR>D:\ProgramFiles\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>D:\Documents\Code\Arduino\PSM\Atividade 01\Final\Atividade01\Atividade01\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>D:/ProgramFiles\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328Pdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>D:\Documents\Code\Arduino\PSM\Atividade 01\Final\Atividade01\Atividade01\Debug\Atividade01.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>Atividade01.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>Atividade01.map</FILE>
+  <FILE>Atividade01.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <setup><FILE>D:\Documents\Code\Arduino\PSM\Atividade 01\Final\Atividade01\Atividade01\main.asm</FILE><LINE>10</LINE></setup>
+  <start><FILE>D:\Documents\Code\Arduino\PSM\Atividade 01\Final\Atividade01\Atividade01\main.asm</FILE><LINE>16</LINE></start>
+  <check_3><FILE>D:\Documents\Code\Arduino\PSM\Atividade 01\Final\Atividade01\Atividade01\main.asm</FILE><LINE>20</LINE></check_3>
+  <check_3_reversed><FILE>D:\Documents\Code\Arduino\PSM\Atividade 01\Final\Atividade01\Atividade01\main.asm</FILE><LINE>24</LINE></check_3_reversed>
+  <led01_off><FILE>D:\Documents\Code\Arduino\PSM\Atividade 01\Final\Atividade01\Atividade01\main.asm</FILE><LINE>28</LINE></led01_off>
+  <led01_on_off><FILE>D:\Documents\Code\Arduino\PSM\Atividade 01\Final\Atividade01\Atividade01\main.asm</FILE><LINE>31</LINE></led01_on_off>
+  <led01_on_on><FILE>D:\Documents\Code\Arduino\PSM\Atividade 01\Final\Atividade01\Atividade01\main.asm</FILE><LINE>34</LINE></led01_on_on>
+  <check_2><FILE>D:\Documents\Code\Arduino\PSM\Atividade 01\Final\Atividade01\Atividade01\main.asm</FILE><LINE>37</LINE></check_2>
+  <check_2_inversed><FILE>D:\Documents\Code\Arduino\PSM\Atividade 01\Final\Atividade01\Atividade01\main.asm</FILE><LINE>41</LINE></check_2_inversed>
+  <led02_off><FILE>D:\Documents\Code\Arduino\PSM\Atividade 01\Final\Atividade01\Atividade01\main.asm</FILE><LINE>48</LINE></led02_off>
+  <led02_on><FILE>D:\Documents\Code\Arduino\PSM\Atividade 01\Final\Atividade01\Atividade01\main.asm</FILE><LINE>45</LINE></led02_on>
+ </LABELS>
+</ASSEMBLER_INFO>

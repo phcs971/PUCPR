@@ -9,8 +9,8 @@ const int GYRO_CONFIG =   0x1B; // registro de configuração do giroscópio
 const int ACCEL_CONFIG =  0x1C; // registro de configuração do acelerômetro
 const int ACCEL_XOUT =    0x3B; // registro de leitura do eixo X do acelerômetro
  
-const int sda_pin = D5; // definição do pino I2C SDA
-const int scl_pin = D6; // definição do pino I2C SCL
+const int sda_pin = D4; // definição do pino I2C SDA
+const int scl_pin = D5; // definição do pino I2C SCL
  
 // variáveis para armazenar os dados "crus" do acelerômetro
 int16_t AcX, AcY, AcZ, Tmp, GyX, GyY, GyZ;
@@ -80,7 +80,7 @@ uint8_t readRegMPU(uint8_t reg) {
 void findMPU(int mpu_addr) {
   Wire.beginTransmission(MPU_ADDR);
   int data = Wire.endTransmission(true);
- 
+  Serial.println(data);
   if(data == 0) {
     Serial.print("Dispositivo encontrado no endereço: 0x");
     Serial.println(MPU_ADDR, HEX);
@@ -96,7 +96,7 @@ void checkMPU(int mpu_addr) {
   findMPU(MPU_ADDR);
      
   int data = readRegMPU(WHO_AM_I); // Register 117 – Who Am I - 0x75
-   
+
   if(data == 104) {
     Serial.println("MPU6050 Dispositivo respondeu OK! (104)");
  
@@ -224,7 +224,7 @@ void reconnectWiFi() {
  
   Serial.println();
   Serial.print("Conectado com sucesso na rede: ");
-//  Serial.println(SSID);
+  Serial.println(SSID);
   Serial.print("IP obtido: ");
   Serial.println(WiFi.localIP());  
 }
