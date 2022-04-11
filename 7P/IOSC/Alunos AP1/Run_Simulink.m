@@ -29,12 +29,18 @@ set(0,'DefaultTextFontSize', 16)
 %% Running OPEN LOOP simulation
 
 V_Profile=[00 0.0;
-          100 0.0;
-          100 0.4;
-          200 0.4;
+          50 0.0;
+          50 0.2;
+          100 0.2;
+          100 0.3;
+          250 0.3;
+          250 0.4;
+          400 0.4;
+          400 0.475;
+          500 0.475;
           ];
      
-Time_sim=200;
+Time_sim=500;
 Ts=0.01;
 
 sim('SphericalTank');
