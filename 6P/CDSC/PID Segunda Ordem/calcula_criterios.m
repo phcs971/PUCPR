@@ -1,5 +1,6 @@
 function [Mp, tp, ts_2, ts_5, tr, td] = calcula_criterios(numerador,denominador)
     f = tf(numerador, denominador);
+    pretty(f);
     [u, t] = step(f);
     settling_value = u(end);
     
