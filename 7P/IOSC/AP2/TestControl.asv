@@ -1,0 +1,79 @@
+%% Plot features
+
+close all;
+clear all;
+% Change default axes fonts.
+set(0,'DefaultAxesFontName', 'Arial')
+set(0,'DefaultAxesFontSize', 16)
+% Change default text fonts.
+set(0,'DefaultAxesFontName', 'Arial')
+set(0, 'DefaultAxesFontWeight','Bold')
+set(0,'DefaultTextFontSize', 16)
+
+%% Define process to control: [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+Model=1;
+
+%% Load Model
+
+LoadModel;
+CalculaModelo;
+
+%% Simulation
+times = [50 20 20 20 20 20 20 20 20];
+time = times(Model);
+
+simulation = sim("PIDControl");
+result = simulation.result;
+t = result(:,1);
+in = result(:,2);
+out = result(:,3);
+p = result(:,4);
+pi = result(:,5);
+control = result(:,6);
+error = result(:,7);
+p2 = result(:,4);
+pi2 = result(:,5);
+control = result(:,6);
+error = result(:,7);
+
+%% Plot
+
+figure(2)
+subplot(211);
+plot(t, in,'k','linewidth', 1); hold on;
+plot(t, out,'m','linewidth', 2); hold on;
+
+if Model == 6
+    plot(t, p,'g','linewidth', 2); hold on;
+    legend("Input", "Output", "Controller P (ZN)")
+else
+    plot(t, pi,'g','linewidth', 2); hold on;
+    legend("Input", "Output", "Controller PI (ZN)")
+end
+
+grid on;
+
+subplot(212);
+plot(t, in, 'k', 'lineWidth', 1); hold on;
+plot(t, control, 'g', 'lineWidth', 2); hold on;
+legend("Input", "Controle ZN");
+grid on;
+
+% subplot(313);
+% 
+% plot(t, in, 'k', 'lineWidth', 1); hold on;
+% plot(t, error, 'r', 'lineWidth', 2); hold on;
+% legend("Input", "Error");
+% grid on;
+
+%% Control performance assesment : dynamic response
+
+Tt=t;
+Rt=in;
+Yt=pi;
+Ut=control;
+
+IAE = sum(abs(Rt-Yt))
+
+TV = sum(abs(diff(Ut)))
