@@ -1,0 +1,10 @@
+patient = 10;
+LoadPatient;
+
+result = sim("ChildrenModel.slx");
+
+time = result.Out(:,1);
+y = result.Out(:,2);
+info = stepinfo(y, time, y(end), y(1))
+
+k = 

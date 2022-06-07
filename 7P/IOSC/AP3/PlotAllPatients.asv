@@ -41,14 +41,11 @@ for i = 1:47
             plot(time, control); hold on;
             ylabel("Controle")
             grid on;
-            if min(out) < 40
-                fprintf("Baixo: %d\n", i)
-            end
         end
     catch E
-        fprintf("Erro: %d\n", i)
+        
     end
-%     pause(1)
+    pause(1)
 end
 
 close(w);
