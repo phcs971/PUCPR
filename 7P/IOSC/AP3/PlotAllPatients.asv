@@ -14,11 +14,19 @@ patient = 36;
 LoadPatient;
 CalculaModelo;
 
-for i = 1:47
+% for i = 1:47
+up = [4 10 12 27 35 43];
+ok = [1 2 3 5 6 7 8 9 11 13 14 18 21 22 24 25 28 29 30 31 32 33 34 36 37 38 40 41 42 44 ]
+for i = up
     try 
         if i == 39
             continue
         else
+%             step = 0.1;
+%             if i == 12
+%                 step = 0.05;
+%             end
+            fprintf("Modelo %d\n", i)
             waitbar(i/48, w, "Carregando Modelo " + i);
             
             patient = i;
@@ -40,12 +48,17 @@ for i = 1:47
             subplot(212);
             plot(time, control); hold on;
             ylabel("Controle")
+
             grid on;
+            if min(out) < 40
+                fprintf("Baixo: %d\n", i)
+            end
         end
     catch E
-        
+        fprintf("Erro: %d\n", i)
     end
-    pause(1)
+    input("Enter para continuar")
+%     pause(1)
 end
 
 close(w);

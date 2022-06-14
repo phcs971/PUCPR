@@ -12,5 +12,7 @@ tau = info.SettlingTime / 4;
 model = tf(K, [tau 1], 'inputDelay', T);
 % step(model, 100)
 
-Kp = 0.5 * tau / (K * T);
+Kp = 0.58 * tau / (K * T);
 Ti = 4 * T;
+% Kp = 0.70 * tau / (K * T);
+% Ti = 2.9 * T;
