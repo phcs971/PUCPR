@@ -9,33 +9,39 @@ y = [40 40 60 60];
 patch(x,y,'g','LineStyle','none'); hold on;
 alpha(.1)
 
+% patient = 36;
+set1 = 52;
+k1 = -21.6730;
+ti1 = 4.6667;
 
-patient = 36;
-setpoint = 52;
 % patient = 18;
-% setpoint = 47;
-LoadPatient;
-CalculaModelo;
+set2 = 47;
+k2 = -13.56;
+ti2 = 5.75;
 
-% for i = 1:47
-up = [4 10 12 27 35 43];
-ok = [1 2 3 5 6 7 8 9 11 13 14 18 21 22 24 25 28 29 30 31 32 33 34 36 37 38 40 41 42 44 45 46 47];
-down = [15 16 17 19 20 23 26 27];
+% stable1 = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 21 22 24 25 27 28 29 30 31 32 33 34 35 36 37 38 40 41 42 43 43 46 47];
+% stable2 = [15 16 17 18 19 20 23 26 45];
 
-ok2 = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 21 22 24 25 27 28 29 30 31 32 33 34 35 36 37 38 40 41 42 43 43 46 47];
-down2 = [15 16 17 18 19 20 23 26 45];
-
-for i = ok2
+for i = 1:47
     try 
         if i == 39
             continue
         else
-            fprintf("Modelo %d\n", i)
             waitbar(i/48, w, "Carregando Modelo " + i);
             
             patient = i;
+
             LoadPatient;
-%             CalculaModelo;
+
+            if age >= 15 || imc <= 14.5 || imc >= 27.5 || (age <= 8 && imc >= 17) || (gender == 0 && height > 160 && height <=165)
+                Ti = ti2;
+                setpoint = set2;
+                Kp = k2;
+            else
+                Ti = ti1;
+                setpoint = set1;
+                Kp = k1;
+            end
             
             result = sim("Propofol_Children");
         
@@ -54,15 +60,10 @@ for i = ok2
             ylabel("Controle")
 
             grid on;
-            if min(out) < 40
-                fprintf("Baixo: %d\n", i)
-            end
         end
     catch E
         fprintf("Erro: %d\n", i)
     end
-%     input("Enter para continuar\n")
-%     pause(1)
 end
 
 close(w);
