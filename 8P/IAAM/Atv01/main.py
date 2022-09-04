@@ -32,7 +32,6 @@ def loadData():
     return (inputs, fixed_targets)
 
 def shuffleData(inputs, targets):
-
     return train_test_split(inputs, targets, test_size=0.5)
 
 
