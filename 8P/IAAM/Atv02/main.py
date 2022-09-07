@@ -4,10 +4,12 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.svm import SVR
 from sklearn.metrics import r2_score
 from tqdm import tqdm
 import seaborn as sns
 import matplotlib.pyplot as plt
+
 
 def readData():
     df = pandas.read_csv("patients.csv")
@@ -44,11 +46,23 @@ def randomForest(inputs_train, inputs_test, targets_train, targets_test):
     r2score_RF = r2_score(targets_test, predict_RF)
     return r2score_RF
 
+def svr(inputs_train, inputs_test, targets_train, targets_test):
+    scores = []
+    for i in target_keys:
+        model_SVR = SVR()
+        model_SVR.fit(inputs_train, targets_train[i])
+        predict_SVR = model_SVR.predict(inputs_test)
+        scores.append(r2_score(targets_test[i], predict_SVR))
+    return np.mean(scores)
+    
+
+target_keys = ["E0", "Td", "E50", "y", "k"]
+
 def main():
     df = readData()
 
     inputs = df[["Age", "Weight", "Height"]]
-    targets = df[["E0", "Td", "E50", "y", "k"]]
+    targets = df[target_keys]
 
     # sns.heatmap(df.corr(), cmap="YlGnBu", annot= True)
     # plt.show()
@@ -56,19 +70,24 @@ def main():
     for i in range(2, 8):
         results_LR = []    
         results_RF = []    
+        results_SVR = []        
         test_size = i/10
         print(f"Test Size: {test_size}")
         for _ in tqdm(range(0, 60)):
             inputs_train, inputs_test, targets_train, targets_test = train_test_split(inputs,  targets, test_size=test_size)
             r2score_LR = linearReg(inputs_train, inputs_test, targets_train, targets_test)
             r2score_RF = randomForest(inputs_train, inputs_test, targets_train, targets_test)
+            r2score_SVR = svr(inputs_train, inputs_test, targets_train, targets_test)
             results_LR.append(r2score_LR)
             results_RF.append(r2score_RF)
+            results_SVR.append(r2score_SVR)
 
         print("Linear Regression:")
         print(f"R2score: {np.mean(results_LR)}")
         print("Random Forest:")
         print(f"R2score: {np.mean(results_RF)}")
+        print("SVR:")
+        print(f"R2score: {np.mean(results_SVR)}")
         print()
 
     return
