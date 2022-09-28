@@ -47,14 +47,6 @@ def knnPredict(knn, inputs, targets):
     printResult(tp, tn, fp, fn, len(result))
     return (tp, tn, fp, fn)
 
-def randomForestRegressor(inputs, targets):
-    forestRegressor= RandomForestRegressor()
-    inputs_train, inputs_test, targets_train, targets_test= train_test_split(inputs,  targets, test_size= 0.3)
-    forestRegressor.fit(inputs_train, targets_train)
-    predict= forestRegressor.predict(inputs_test)
-    score= r2_score(targets_test, predict)
-    return score
-
 def calculateResults(result, targets):
     tp,tn,fp,fn = (0,0,0,0)
     for i in range(0, len(result)):
