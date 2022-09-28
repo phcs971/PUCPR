@@ -1,7 +1,7 @@
 from calendar import month_name
 from json import load
 from modulefinder import IMPORT_NAME
-from  scipy.io import loadmat
+from   import loadmat
 import pandas as pd
 from sklearn import tree
 import cross_val_score
