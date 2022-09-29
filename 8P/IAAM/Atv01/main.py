@@ -1,10 +1,6 @@
-from pyexpat import model
-from sympy import E
 import scipy.io
 from sklearn.neighbors import KNeighborsClassifier 
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import r2_score
 
 def main():
     inputs, targets = loadData()
