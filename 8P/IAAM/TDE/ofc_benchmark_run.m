@@ -1,0 +1,1 @@
+simOut = sim(simulation.simulink_model, 'SrcWorkspace', 'current');
