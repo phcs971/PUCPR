@@ -21,6 +21,12 @@ def trainTestSplit(inputs, outputs):
 def main():
     df = generateDataFrame()
     inputs, outputs = splitDataFrame(df)
+
+    print(inputs.describe())
+    print("")
+    print(outputs.value_counts())
+    print("")
+    
     x_train, x_test, y_train, y_test = trainTestSplit(inputs, outputs)
     return 0
 
