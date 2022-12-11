@@ -6,7 +6,7 @@
 % http://www.researchgate.net/profile/Gilberto_Reynoso-Meza
 % Version: Apr/2019
 
-function uk=PI(r,y,Tuning)
+function uk=CTR_PI(r,y,Tuning)
 
 % Introduce persistent parameters
 persistent Ie;
@@ -18,7 +18,7 @@ ek=r-y;
 
 % Reading control parameters
 if nargin==2
-    Tuning=ReadTuning('PI');
+    Tuning=ReadTuning('CTR_PI');
 end
 
 kp=Tuning(1);

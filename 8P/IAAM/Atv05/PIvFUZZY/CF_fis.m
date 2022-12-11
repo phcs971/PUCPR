@@ -15,46 +15,21 @@
 % Version: Jun/2020
 
 function [J,X]=CF_fis(X,~)
-
-tfinal=160;
-d_T=0.2;
-
-J=zeros(size(X,1),1);
-
-for x=1:size(X,1)
-
-    U(1)=0; % Control action or manual input
-    Y(1)=0; % Process response
-    R(1)=0; % Reference
-    T(1)=0; % Time vector
+    J=zeros(size(X,1),1);
     
-    clear PDfis_TS0
-    for t=0:d_T:tfinal
+    for x=1:size(X,1)
+        [R,Y,~,T] = PM_fis(X(x,:));
     
-        r=sp(t);
-
-        [~,y]=ode45(@PM,[0:d_T:d_T],[Y(end) U(end)]);
-    
-        u=PDfis_TS0(r,y(end,1),X(x,:));  %Use this to control the system.
-
-        R(end+1)=r;
-        Y(end+1)=y(end,1);
-        U(end+1)=u;
-        T(end+1)=t;
-    
+        % Fixing
+        X(x,1:5)=sort(X(1,1:5));
+        X(x,6:10)=sort(X(1,6:10));
+        
+        E = R - Y;
+        
+        IAE = sum(abs(E));
+        ISE = sum(E.^2);
+        ITAE = sum(abs(E).*T);
+        
+        J(x,1) = nthroot(IAE*ISE*ITAE, 3); %MEDIA GEOMETRICA 
     end
-
-    % Fixing
-    X(x,1:5)=sort(X(1,1:5));
-    X(x,6:10)=sort(X(1,6:10));
-    
-    J(x,1)=sum(abs(R-Y));
-
-    U=[];
-    Y=[];
-    T=[];
-    R=[];
-    
-
-
 end

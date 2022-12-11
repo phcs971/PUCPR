@@ -2,7 +2,7 @@
 % 9 inference rules.
 % Granularity 3.
 
-function uk=PDfis_TS0(r,y,Tuning)
+function uk=CTR_fis(r,y,Tuning)
 
 persistent e_old;
 if isempty(e_old)
@@ -20,7 +20,7 @@ e_old=x1;
 
 % Reading control parameters
 if nargin==2
-    Tuning=ReadTuning('PDfis_TS0');
+    Tuning=ReadTuning('CTR_fis');
 end
 
 Learning=Tuning;
